@@ -15,4 +15,12 @@ public class Cartas extends JuegoMesa{
                 "numeroCartas=" + numeroCartas +
                 '}';
     }
+
+    public int getNumeroCartas() {
+        return numeroCartas;
+    }
+
+    public void setNumeroCartas(int numeroCartas) {
+        this.numeroCartas = numeroCartas;
+    }
 }
