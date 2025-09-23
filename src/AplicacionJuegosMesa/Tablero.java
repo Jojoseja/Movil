@@ -14,4 +14,12 @@ public class Tablero extends JuegoMesa{
                 "boardSize='" + boardSize + '\'' +
                 '}';
     }
+
+    public String getBoardSize() {
+        return boardSize;
+    }
+
+    public void setBoardSize(String boardSize) {
+        this.boardSize = boardSize;
+    }
 }

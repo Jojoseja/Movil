@@ -1,8 +1,9 @@
 package AplicacionJuegosMesa;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
-public class JuegoMesa {
+public abstract class JuegoMesa implements Serializable {
 
     private String titulo;
     private String autor;
