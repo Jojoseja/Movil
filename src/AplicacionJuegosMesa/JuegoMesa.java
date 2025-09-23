@@ -82,13 +82,14 @@ public class JuegoMesa {
 
     @Override
     public String toString() {
-        return "JuegoMesa{" +
-                "titulo='" + titulo + '\'' +
-                ", autor='" + autor + '\'' +
-                ", minJug=" + minJug +
-                ", maxJug=" + maxJug +
-                ", duration=" + duration +
-                ", tipoJuego=" + tipoJuego +
-                '}';
+        return titulo + ";;" + autor + ";;" +  minJug  + ";;" +  maxJug
+                + ";;" +  duration + ";;" +  tipoJuego;
+
+    }
+
+    public String getDescripcion() {
+        return "Titulo: " + titulo + ", Autor: " + autor +
+                ", Mínimo de Jugadores: " + minJug + ", Maximo de Jugadores: " + maxJug +
+                ", Duracion media (m): " + duration + ", Tipo de Juego: " + tipoJuego;
     }
 }
