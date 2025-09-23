@@ -34,8 +34,3 @@
 8. Usar un enum TipoJuego en lugar ede cadenas sueltas
 
 9. Seguir principios SOLID en el diseño de clases
-
-## Clases
-- JuegoMesa (abstract)
-  - JuegoCartas
-  - JuegoTablero

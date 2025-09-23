@@ -1,6 +1,6 @@
 package EjercicioAplicacion;
 
-public class InvalidNumber extends RuntimeException {
+public class InvalidNumber extends Exception {
     public InvalidNumber(String message) {
         super(message);
     }

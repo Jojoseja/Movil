@@ -1,9 +1,5 @@
 package EjercicioAplicacion;
 
-enum TipoJuego {
-    ESTRATEGIA, PARTY, FAMILIAR, OTRO
-}
-
 public abstract class JuegoMesa {
 
     //Atributos
@@ -14,7 +10,7 @@ public abstract class JuegoMesa {
     private int duracion; //Duración de la partida expresado en minutos
     private TipoJuego tipoJuego;
 
-    //atributo clase JuegoColeccion heredado de ArrayList
+    //Atributo clase JuegoColeccion heredado de ArrayList
     private static JuegoColeccion juegoColeccion = new JuegoColeccion();
 
 

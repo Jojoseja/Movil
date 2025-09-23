@@ -17,9 +17,9 @@ public class JuegoCartas extends JuegoMesa {
         return numeroCartas;
     }
 
-    public void setNumeroCartas(int numeroCartas) throws InvalidNumber {
+    public void setNumeroCartas(int numeroCartas) throws InvalidNumber{
         if (numeroCartas <= 0) {
-            throw new InvalidNumber("El número de cartas no puede ser menor o igual a 0");
+            throw new InvalidNumber(numeroCartas + " no puede ser menor o igual a 0");
         } else {
             this.numeroCartas = numeroCartas;
         }

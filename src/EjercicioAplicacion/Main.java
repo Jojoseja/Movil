@@ -1,41 +1,106 @@
 package EjercicioAplicacion;
 
-import AplicacionJuegosMesa.Cartas;
-import AplicacionJuegosMesa.JuegoMesa;
-import AplicacionJuegosMesa.Tablero;
-import AplicacionJuegosMesa.TipoJuego;
-
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Main {
-    public static void main(String[] args) {
-        AplicacionJuegosMesa.JuegoMesa hola1 = new Cartas("Sota", "Yo", 2, 10, 90, AplicacionJuegosMesa.TipoJuego.PARTY, 40);
-        AplicacionJuegosMesa.JuegoMesa hola2 = new Tablero("Hundir la flota", "Yo", 2, 10, 90, AplicacionJuegosMesa.TipoJuego.OTRO, "100mm x 120mm");
-        AplicacionJuegosMesa.JuegoMesa hola3 = new Cartas("Poker", "Yo", 2, 10, 90, AplicacionJuegosMesa.TipoJuego.ESTRATEGIA, 52);
-        AplicacionJuegosMesa.JuegoMesa hola4 = new Tablero("Busqueda en el Sotano", "Yo", 1, 10, 90, TipoJuego.FAMILIAR, "150mm x 200mm ");
-
+    public static void main(String[] args) throws InvalidNumber {
+        //Cargar datos de JuegoColeccion.txt en el Array
+        JuegoMesa.getJuegoColeccion().cargarLista();
         Scanner sc = new Scanner(System.in);
+
+        //Inicio Menu
         boolean menu = true;
         while (menu) {
             System.out.println("Bienvenido al Sistema");
             System.out.println("1. Agregar Juego" + "\n" + "2. Listado de Juego" + "\n" + "3. Búsqueda" + "\n" + "4. Salir");
-            String input = sc.next();
+            String input = validStringInput();
+
             switch (input) {
                 case "1":
-                    continue;
+                    System.out.print("Nombre del Juego: ");
+                    String nombreJuego = validStringInput();
+
+                    System.out.print("Autor: ");
+                    String autor = validStringInput();
+
+                    System.out.print("Minimo de Jugadores: ");
+                    int minimoJugadores = validIntInput();
+
+                    System.out.print("Maximo de Jugadores: ");
+                    int maximoJugadores = validIntInput(minimoJugadores);
+
+                    System.out.print("Duración: ");
+                    int duracion = validIntInput();
+
+                    System.out.println("Tipo de Juego: ");
+                    System.out.println("1: Estrategia, 2: Party, 3: Familiar, otra tecla: Otro");
+                    int eleccion = validIntInput();
+                    TipoJuego tipo;
+
+                    switch (eleccion) {
+                        case 1:
+                            tipo = TipoJuego.ESTRATEGIA;
+                            break;
+                        case 2:
+                            tipo = TipoJuego.PARTY;
+                            break;
+                        case 3:
+                            tipo = TipoJuego.FAMILIAR;
+                            break;
+                        default:
+                            tipo = TipoJuego.OTRO;
+                    }
+
+                    System.out.println("Es un juego de 1: Tablero, 2: Cartas o nada parecido: ");
+                    int especifico = validIntInput();
+                    switch (especifico) {
+                        case 1:
+                            System.out.println("Tamaño del Tablero: ");
+                            String size = validStringInput();
+                            new JuegoTablero(nombreJuego, autor, minimoJugadores, maximoJugadores, duracion, tipo, size);
+                            break;
+                        case 2:
+                            System.out.println("Numero de Cartas: ");
+                            int numeroCartas = validIntInput();
+                            new JuegoCartas(nombreJuego, autor, minimoJugadores, maximoJugadores, duracion, tipo, numeroCartas);
+                            break;
+                        default:
+                            continue;
+                    }
+                    //Actualizar Lista
+                    JuegoMesa.getJuegoColeccion().descargarLista();
+                    break;
+
                 case "2":
-                    System.out.println(JuegoMesa.coleccion);
+                    System.out.println(JuegoMesa.getJuegoColeccion());
                     break;
                 case "3":
                     System.out.print("Escoge palabras clave: ");
-                    String busqueda = sc.next();
-                    for (JuegoMesa mesa : JuegoMesa.coleccion.busqueda(busqueda)) {
-                        System.out.println(mesa.getTitulo());
+                    String busqueda = validStringInput();
+                    ArrayList<JuegoMesa> auxList = new ArrayList<>();
+                    boolean match = false;
+                    for (JuegoMesa mesa : JuegoMesa.getJuegoColeccion().busqueda(busqueda)) {
+                        auxList.add(mesa);
+                    }
+                    for  (JuegoMesa mesa : auxList) {
+                        if (mesa.getTitulo().toLowerCase().equals(busqueda.toLowerCase())) {
+                            System.out.println(mesa.getDescripcion());
+                            match = true;
+                        }
+                    }
+                    if (!match) {
+                        for  (JuegoMesa mesa : auxList) {
+                            System.out.println(mesa.getTitulo());
+                        }
                     }
                     sc.next();
+                    System.out.println("Presiona cualquier tecla para continuar...");
                     break;
                 case "4":
+                    System.out.println("Adios!");
                     menu = false;
+                    JuegoMesa.getJuegoColeccion().descargarLista();
                     break;
                 default:
                     System.out.println("Escoge una opción correcta:");
@@ -43,5 +108,59 @@ public class Main {
 
             }
         }
+    }
+
+    public static String validStringInput(){
+        Scanner sc = new Scanner(System.in);
+        String input;
+        while (true){
+            try {
+                input = sc.nextLine();
+                if (input.trim().isEmpty()) {
+                    throw new Exception("Error: Texto invalido");
+                }
+                break;
+            } catch (Exception e) {
+                System.out.println(e.getMessage());
+            }
+        }
+        return input;
+    }
+
+    // Validar los inputs
+    public static int validIntInput(){
+        Scanner sc = new Scanner(System.in);
+        int input;
+        while (true){
+            try {
+                input = sc.nextInt();
+                if (input <= 0 ){
+                    throw new InvalidNumber("Error: Numero invalido");
+                }
+                break;
+            } catch (Exception e) {
+                System.out.println(e.getMessage());
+            }
+        }
+        return input;
+    }
+
+
+    // Usado sólamente para validar que el máximo de jugadores sea igual o mayor que el mínimo de jugadores
+    public static int validIntInput(int minJug){
+        Scanner sc = new Scanner(System.in);
+        int input;
+        while (true){
+            try {
+                input = sc.nextInt();
+                if (input < minJug ){
+                    throw new InvalidNumber("Error: Numero invalido");
+                }
+                break;
+            } catch (Exception e) {
+                System.out.println(e.getMessage());
+            }
+        }
+        return input;
     }
 }
