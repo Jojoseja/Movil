@@ -1,4 +1,0 @@
-JuegoMesa hola1 = new Cartas("Sota", "Yo", 2, 10, 90, TipoJuego.PARTY, 40);
-JuegoMesa hola2 = new Tablero("Hundir la flota", "Yo", 2, 10, 90, TipoJuego.OTRO, "100mm x 120mm");
-JuegoMesa hola3 = new Cartas("Poker", "Yo", 2, 10, 90, TipoJuego.ESTRATEGIA, 52);
-JuegoMesa hola4 = new Tablero("Busqueda en el Sotano", "Yo", 1, 10, 90, TipoJuego.FAMILIAR, "150mm x 200mm ");
