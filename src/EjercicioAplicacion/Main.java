@@ -11,8 +11,8 @@ public class Main {
 
         //Inicio Menu
         boolean menu = true;
+        System.out.println("Bienvenido al Sistema");
         while (menu) {
-            System.out.println("Bienvenido al Sistema");
             System.out.println("1. Agregar Juego" + "\n" + "2. Listado de Juego" + "\n" + "3. Búsqueda" + "\n" + "4. Salir");
             String input = validStringInput();
 
@@ -94,8 +94,9 @@ public class Main {
                             System.out.println(mesa.getTitulo());
                         }
                     }
-                    sc.next();
                     System.out.println("Presiona cualquier tecla para continuar...");
+                    sc.next();
+
                     break;
                 case "4":
                     System.out.println("Adios!");
@@ -103,8 +104,7 @@ public class Main {
                     JuegoMesa.getJuegoColeccion().descargarLista();
                     break;
                 default:
-                    System.out.println("Escoge una opción correcta:");
-                    System.out.println("1. Agregar Juego" + "\n" + "2. Listado de Juego" + "\n" + "3. Búsqueda" + "\n" + "4. Salir");
+                    System.out.println("Escoge una opción correcta");
 
             }
         }

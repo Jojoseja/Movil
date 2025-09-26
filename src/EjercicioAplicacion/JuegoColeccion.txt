@@ -2,4 +2,3 @@ cartas;;Sota;;Yo;;2;;10;;90;;PARTY;;40
 tablero;;Hundir la flota;;Yo;;2;;10;;90;;OTRO;;100mm x 120mm
 cartas;;Poker;;Yo;;2;;10;;90;;ESTRATEGIA;;52
 tablero;;Busqueda en el Sotano;;Yo;;1;;10;;90;;FAMILIAR;;150mm x 200mm
-tablero;;Hola;;Yo;;3;;5;;90;;PARTY;;Mu pequeño
